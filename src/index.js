@@ -34,14 +34,9 @@ class Project {
 // 3. Expand a single task to see or edit its' details.
 // 4. Delete a task or project with all the tasks it contains.
 
-function component() {
-  // Main container.
-  const content = document.createElement('div');
-  content.id = 'content';
-
+function createHeader() {
   // Header.
   const header = document.createElement('header');
-  content.append(header);
 
   const h1 = document.createElement('h1');
   h1.id = 'title';
@@ -65,11 +60,71 @@ function component() {
   const secondButton = navChildren.item(1);
   secondButton.innerHTML = 'Projects';
 
+  return header;
+}
 
-  return content;
+function createTaskTab() {
+  const main = document.createElement('main');
+  main.id = 'main';
+
+  main.append(createAddTaskButton());
+
+  return main;
+}
+
+function addTask() {
+  const main = document.getElementById('main');
+  const addTaskButton = document.querySelector('.task-button');
+  main.removeChild(addTaskButton);
+
+  const inputContainer = document.createElement('div');
+  inputContainer.classList.add('input-container');
+  main.append(inputContainer);
+
+  const input = document.createElement('input');
+  const buttonAdd = document.createElement('button');
+  buttonAdd.innerHTML = 'Add';
+  const buttonCancel = document.createElement('button');
+  buttonCancel.innerHTML = 'Cancel';
+  inputContainer.append(input, buttonAdd, buttonCancel);
+
+  buttonAdd.addEventListener('click', () => {
+    if (input.value === "") {
+      alert('Please enter a title for your task!');
+    } else {
+      addNewTask(input.value);
+    }
+  });
+
+  // Remove the form and restore the previous button.
+  buttonCancel.addEventListener('click', () => {
+    removeAllChildren(main);
+    main.append(createAddTaskButton());
+  });
+}
+
+function removeAllChildren(parent) {
+  while (parent.firstChild) {
+      parent.removeChild(parent.firstChild);
+  }
+}
+
+// Creates an AddTask button.
+function createAddTaskButton() {
+  const addTaskButton = document.createElement('button');
+  addTaskButton.innerHTML = 'Add new Task';
+  addTaskButton.classList.add('task-button');
+  addTaskButton.addEventListener('click', addTask);
+  return addTaskButton;
+}
+
+// Creates a new Task object.
+function addNewTask(title) {
+  let newTask = new Task(Task.title = title);
 }
   
-document.body.appendChild(component());
+document.body.appendChild(createHeader());
+document.body.appendChild(createTaskTab());
 
 // --- Testing ---
 let project1 = new Project('First Project');
