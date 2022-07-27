@@ -1,3 +1,49 @@
-.hello {
-    color: red;
+* {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+:root {
+    --color-primary: ;
+    --font-size-default: 1rem;
+    --font-size-large: 2rem;
+}
+
+#content {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+header {
+    background-color: #40BCD8;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#title {
+    margin: 24px 0;
+}
+
+nav {
+    display: flex;
+    gap: 20vw;
+    margin-bottom: 24px;
+}
+
+.nav-button {
+    background-color: #F39237;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    padding: 16px 32px;
+    font-size: 1rem;
+}
+
+button:hover {
+    cursor: pointer;
+    background-color: #D63230;
 }
